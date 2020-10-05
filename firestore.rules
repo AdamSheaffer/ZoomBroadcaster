@@ -5,9 +5,9 @@ service cloud.firestore {
     	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isApproved == true;
     }
 
-    match /{document=**} {
-      allow read, write: if
-          request.time < timestamp.date(2020, 10, 9);
+    match /classrooms/{document=**} {
+      allow read; 
+      allow write: if isInstructor()
     }
 
     match /users/{document} {
