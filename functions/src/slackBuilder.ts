@@ -7,13 +7,15 @@ export const buildChannelSlackMessage = (
   const { zoomLink, zoomPassword, cohortId } = slackOptions;
   console.log("Building link for channel", `${appUrl}/${cohortId}`);
 
+  const passwordMessage = zoomPassword ? `\nPassword: ${zoomPassword}` : "";
+
   return {
     blocks: [
       {
         type: "section",
         text: {
           type: "plain_text",
-          text: `A new zoom recording has been added for your classroom.\nPassword: ${zoomPassword}`,
+          text: `A new zoom recording has been added for your classroom ${passwordMessage}`,
         },
       },
       {

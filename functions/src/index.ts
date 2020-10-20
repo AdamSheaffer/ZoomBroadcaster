@@ -42,7 +42,7 @@ export const zoomRecordingReady = functions.https.onRequest(
     } = payload.object;
 
     const recording = {
-      password,
+      password: password || null,
       meetingName: topic,
       url: share_url,
       date: new Date(start_time),
@@ -53,6 +53,8 @@ export const zoomRecordingReady = functions.https.onRequest(
     console.log(
       `Handling Zoom request for ${recording.meetingName} with ID ${recording.zoomId} starting at ${recording.date}`
     );
+
+    console.log(JSON.stringify(payload.object));
 
     let classRef: FirebaseFirestore.DocumentReference;
     let classroomHasBeenClaimed = false;
